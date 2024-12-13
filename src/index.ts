@@ -1,21 +1,16 @@
-import express from 'express'
 import { WebSocketServer } from 'ws'
 
-const app = express()
-const httpServer = app.listen(8080)
-
-const wss = new WebSocketServer({ server: httpServer });
+const wss = new WebSocketServer({ port: 8080 });
 
 wss.on('connection', function connection(ws) {
-  ws.on('error', console.error);
-
-  ws.on('message', function message(data, isBinary) {
-    wss.clients.forEach(function each(client) {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(data, { binary: isBinary });
-      }
-    });
+  ws.on('error',function(err){
+    console.log('Error: ',err);
   });
 
+  ws.on('message', incoming);
+  function incoming(message: string): void {
+    console.log('received: %s', message);
+  }
   ws.send('Hello! Message From Server!!');
+  
 });
