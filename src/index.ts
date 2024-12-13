@@ -7,7 +7,7 @@ const server = new WebSocketServer({ port: 8080 });
 const rooms: Rooms = {};
 
 server.on('connection', (ws: WebSocket) => {
-    let currentRoom: string | null = null;
+    let currentRoom: string | null;
 
     ws.on('message', (data: string) => {
         try {
@@ -46,7 +46,8 @@ server.on('connection', (ws: WebSocket) => {
                 }
             }
         } catch (err) {
-            ws.send(JSON.stringify({ type: 'error', message: 'Invalid JSON format.' }));
+            ws.send(JSON.stringify({ type: 'error', message: console.error(err)
+            }));
         }
     });
 
