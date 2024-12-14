@@ -2,14 +2,19 @@
 
 A simple WebSocket-based chat application where users can create, join, and chat in rooms.
 
-## Features include:-
+## 📦 Prerequisites
 
-- Create a room ID with a unique 6-character code.
-- Join existing chat rooms.
-- List active rooms with the number of users.
-- Real-time chat functionality (message polling).
 
-## Project Structure
+| ![TypeScript](https://skillicons.dev/icons?i=typescript) | ![Node.js](https://skillicons.dev/icons?i=nodejs) | ![Git](https://skillicons.dev/icons?i=git) |
+|-----------------|---------|------|
+
+## ✨ Features  
+- Create a room ID with a unique 6-character code. 🔑
+- Join existing chat rooms. 🚪
+- List active rooms with the number of users. 📋
+- Real-time chat functionality (message polling). 💬
+
+## 📁 Project Structure
 
 ``` markdown
 .
@@ -24,12 +29,12 @@ A simple WebSocket-based chat application where users can create, join, and chat
 └── README.md         # Project documentation
 ```
 
-## Setup Instructions
+## 🛠️ Setup Instructions
 
 1. Clone the repository:
    ```bash
-   git clone <repo_url>
-   cd relay-chat-be
+   git clone https://github.com/yashksaini-coder/relay-chat-backend
+   cd relay-chat-backend
    ```
 
 2. Install dependencies:
@@ -42,7 +47,7 @@ A simple WebSocket-based chat application where users can create, join, and chat
    npm run dev
    ```
 
-### Testing:
+### 🧪 Testing:
 
 To test the updated functionality, you can use a Postman and use the Websocket server instance. These are the messages to check the functionality:
 
