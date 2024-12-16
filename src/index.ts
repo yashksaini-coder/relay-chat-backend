@@ -6,8 +6,15 @@ import { Rooms } from '../lib/types';
 const server = new WebSocketServer({ port: 8080 });
 const rooms: Rooms = {};
 
+let usercount = 0;
+
+
 server.on('connection', (ws: WebSocket) => {
-    let currentRoom: string | null;
+
+    usercount++;
+    console.log("User connected "+ usercount);
+    
+    let currentRoom: string | null = null;
 
     ws.on('message', (data: string) => {
         try {
@@ -41,20 +48,32 @@ server.on('connection', (ws: WebSocket) => {
                     }
                     break;
                 }
+                case 'leave_room': {
+                    if (currentRoom) {
+                        leaveRoom(currentRoom, ws, rooms);
+                        broadcast(currentRoom, { message: 'A user has left the room.' }, rooms);
+                        currentRoom = null;
+                    } else {
+                        ws.send(JSON.stringify({ type: 'error', message: 'You are not in a room.' }));
+                    }
+                    break;
+                }
                 default: {
                     ws.send(JSON.stringify({ type: 'error', message: 'Invalid message type.' }));
                 }
             }
         } catch (err) {
-            ws.send(JSON.stringify({ type: 'error', message: console.error(err)
-            }));
+            ws.send(JSON.stringify({ type: 'error', message: 'Invalid JSON format.' }));
         }
     });
 
     ws.on('close', () => {
         if (currentRoom) {
             leaveRoom(currentRoom, ws, rooms);
+            broadcast(currentRoom, { message: 'A user has disconnected.' }, rooms);
         }
+        usercount--;
+        console.log("User disconnected " + usercount);
     });
 });
 
