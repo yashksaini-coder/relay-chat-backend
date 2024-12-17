@@ -16,17 +16,19 @@ A simple WebSocket-based chat application where users can create, join, and chat
 
 ## 📁 Project Structure
 
-``` markdown
+```
 .
-├── lib
-│   ├── utils.ts      # Utility functions like generateRoomCode
-│   ├── room.ts       # Room-related logic
-│   ├── chat.ts       # Chat-related logic
-├── src
-│   ├── index.ts      # Main ts file for WebSocket server
-├── package.json      # Node.js project file
-├── tsconfig.json     # TypeScript configuration
-└── README.md         # Project documentation
+├── .gitignore
+├── dist/
+│   └── index.js
+├── node_modules/
+├── package-lock.json
+├── package.json
+├── README.md
+├── src/
+│   └── index.ts
+├── tsconfig.json
+└── tsconfig.tsbuildinfo
 ```
 
 ## 🛠️ Setup Instructions
@@ -51,44 +53,4 @@ A simple WebSocket-based chat application where users can create, join, and chat
 
 To test the updated functionality, you can use a Postman and use the Websocket server instance. These are the messages to check the functionality:
 
-1. **Create Room**:
-   Send a message with `type: "create_room"`:
-
-   ```json
-   { "type": "create_room" }
-   ```
-
-   Response:
-   ```json
-   { "type": "room_created",
-     "room": "ABC123"
-   }
-   ```
-
-2. **Join Room**:
-   Use the generated room code in the `join_room` request:
-   ```json
-   { "type": "join_room",
-     "room": "ABC123" 
-   }
-   ```
-
-3. **List Rooms**:
-   ```json
-   { "type": "list_rooms" }
-   ```
-
-   Response:
-   ```json
-   { "type": "room_list",
-     "rooms": [{ "room": "ABC123", "userCount": 1 }]
-   }
-   ```
-
-4. **Message**:
-   Send a message with `type: "message"` to broadcast to all users in the room:
-   ```json
-   { "type": "message",
-     "text": "Hello, everyone!"
-   }
-   ```
+![Postman Testing](./assets/img/testing.png)
