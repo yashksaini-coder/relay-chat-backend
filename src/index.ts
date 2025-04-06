@@ -43,13 +43,17 @@ wss.on("connection", (ws: WebSocket) => {
           }
         });
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      console.error('Error processing message:', error instanceof Error ? error.message : error);
     }
   });
 
   ws.on("close", () => {
     userCount--;
+    const index = allSocket.findIndex((user) => user.socket === ws);
+    if (index !== -1) {
+      allSocket.splice(index, 1);
+    }
     console.log(userCount);
   });
 });
